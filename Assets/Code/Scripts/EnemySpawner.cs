@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private Boolean isSpawning = false;
     private void Start()
     {
-        enemiesLeftToSpawn = baseEnemies;
+        StartWave();
     }
 
     // Update is called once per frame
@@ -31,17 +31,24 @@ public class EnemySpawner : MonoBehaviour
             
         timeSinceLastSpawn = Time.deltaTime;
 
-        if (timeSinceLastSpawn >= (1f / enemiesPerSecond))
+        if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
         {
-            Debug.Log("Spawn Enemy");
+            spawnEnemy();
+            enemiesLeftToSpawn--;
+            enemiesAlive++;
+            timeSinceLastSpawn = 0f;
         }
     }
-
-   private void StartWave (){
+    private void StartWave()
+    {
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
         }
-
+    private void spawnEnemy()
+    {
+        GameObject prefabToSpawn = enemyPrefabs[0];
+        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+    }
    private int EnemiesPerWave() {
         return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
         }
