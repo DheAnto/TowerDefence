@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    
     [Header("Attributes")]
     [SerializeField] private GameObject[] enemyPrefabs;
 
@@ -16,18 +18,32 @@ public class EnemySpawner : MonoBehaviour
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
+    private Boolean isSpawning = false;
     private void Start()
     {
         enemiesLeftToSpawn = baseEnemies;
     }
 
-    private int EnemiesPerWave(){
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
-    }
-
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isSpawning) return;
+            
+        timeSinceLastSpawn = Time.deltaTime;
+
+        if (timeSinceLastSpawn >= (1f / enemiesPerSecond))
+        {
+            Debug.Log("Spawn Enemy");
+        }
     }
+
+   private void StartWave (){
+        isSpawning = true;
+        enemiesLeftToSpawn = EnemiesPerWave();
+        }
+
+   private int EnemiesPerWave() {
+        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
+        }
+
 }
