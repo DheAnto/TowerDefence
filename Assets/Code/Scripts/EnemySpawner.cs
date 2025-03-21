@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int currentWave = 1;
     private float timeSinceLastSpawn;
-    private int enemiesAlive;
+    private int enemiesAlive = 0;
     private int enemiesLeftToSpawn;
     private Boolean isSpawning = false;
     private void Start()
@@ -29,10 +29,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!isSpawning) return;
             
-        timeSinceLastSpawn = Time.deltaTime;
+        timeSinceLastSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
         {
+            Debug.Log("enemy spawned");
             spawnEnemy();
             enemiesLeftToSpawn--;
             enemiesAlive++;
