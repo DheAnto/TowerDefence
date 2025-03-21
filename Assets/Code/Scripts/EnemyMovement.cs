@@ -22,6 +22,7 @@ public class EnemyMovementScript : MonoBehaviour
             pathIndex++;
 
             if(pathIndex == LevelManager.main.path.Length){
+                EnemySpawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
                 return;
             } else {
