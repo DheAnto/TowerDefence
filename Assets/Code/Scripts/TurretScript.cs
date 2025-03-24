@@ -1,25 +1,29 @@
 using UnityEngine;
 using UnityEditor;
+using Unity.Mathematics;
 
 public class TurretScript : MonoBehaviour
 {
 
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firingPoint;
 
     [Header("Attribute")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float bps = 1f; //bullets per seconds
+
+    private Transform target;
+    private float timeUntilFire;
 
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
-
-    private Transform target;
-
-
     // Update is called once per frame
     void Update()
     {
@@ -27,8 +31,26 @@ public class TurretScript : MonoBehaviour
             FindTarget();
             return;
         }
-
         RotateTowardsTarget();
+        
+        if (!checkTargetIsInRange())
+        {
+            target = null;
+            return;
+        } else {
+            timeUntilFire += Time.deltaTime;
+            
+
+            if (timeUntilFire >= 1f / bps){
+                
+                Shoot();
+                timeUntilFire = 0f;
+            }
+        }
+    }
+
+    private void Shoot(){
+        Debug.Log("shoot");
     }
 
     private void RotateTowardsTarget(){
@@ -36,14 +58,18 @@ public class TurretScript : MonoBehaviour
         * Mathf.Rad2Deg - 90f;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = targetRotation;
+        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     private void FindTarget(){
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
-
-        if(hits.Length > 0) {
+        if (hits.Length > 0){
             target = hits[0].transform;
-        }
+        }        
+
+    }
+
+    private bool checkTargetIsInRange(){
+        return Vector2.Distance(transform.position, target.position) <= targetingRange;
     }
 }
