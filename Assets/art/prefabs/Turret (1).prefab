@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &569960566808639735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6971579804691254901}
+  m_Layer: 0
+  m_Name: FiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6971579804691254901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569960566808639735}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0020000935, y: 0.413, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3473562294069635463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245823680952501877
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +61,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3115763083247983535}
+  - {fileID: 6971579804691254901}
   m_Father: {fileID: 5502014064952742902}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6519205098087013331
@@ -78,11 +110,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretRotationPoint: {fileID: 3473562294069635463}
+  bulletPrefab: {fileID: 146636053764097877, guid: f7c420656c943e9409a8e35fe58808d6, type: 3}
+  firingPoint: {fileID: 6971579804691254901}
   targetingRange: 2.32
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   rotationSpeed: 150
+  bps: 1
 --- !u!1001 &5073568707506988194
 PrefabInstance:
   m_ObjectHideFlags: 0
