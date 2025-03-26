@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Plot : MonoBehaviour
 {
@@ -27,15 +28,18 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (tower != null) return;
 
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
-        if (towerToBuild.cost > LevelManager.main.currency)
+        if (!LevelManager.main.SpendCurrency(towerToBuild.cost))
         {
             Debug.Log("You can't afford that!");
             return;
         }
-        LevelManager.main.SpendCurrency(towerToBuild.cost);
         tower = Instantiate(towerToBuild.prefab , transform.position, Quaternion.identity);
     }
 }

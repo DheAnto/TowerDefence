@@ -13,12 +13,12 @@ public class LevelManager : MonoBehaviour
     {
         main=this;   
     }
-
-    private void Start()
-    {
-        currency = 100;
-    }
-
+    
+    //private void Start()
+    //{
+      //  currency = currency;
+    //}
+    
     public void IncreaseCurrency(int amount)
     {
         currency += amount;
