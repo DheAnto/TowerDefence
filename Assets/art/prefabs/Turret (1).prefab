@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretRotationPoint: {fileID: 3473562294069635463}
-  bulletPrefab: {fileID: 146636053764097877, guid: f7c420656c943e9409a8e35fe58808d6, type: 3}
+  bulletPrefab: {fileID: 146636053764097877, guid: 98fa23ce580692f46a70454ccd1c1809, type: 3}
   firingPoint: {fileID: 6971579804691254901}
   targetingRange: 10
   enemyMask:

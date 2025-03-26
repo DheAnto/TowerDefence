@@ -117,7 +117,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotationSpeed: 250
-  bps: 4
+  bps: 3
 --- !u!1001 &7958550819871539506
 PrefabInstance:
   m_ObjectHideFlags: 0
