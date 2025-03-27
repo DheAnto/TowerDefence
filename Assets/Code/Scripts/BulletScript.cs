@@ -12,6 +12,11 @@ public class BulletScript : MonoBehaviour
 
     private Transform target;
 
+    private void Start()
+    {
+        Destroy(gameObject, 5f);
+    }
+
     public void SetTarget(Transform _target)
     {
         target = _target;
@@ -23,6 +28,11 @@ public class BulletScript : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.linearVelocity = direction * bulletSpeed;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
