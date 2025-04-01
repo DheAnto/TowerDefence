@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class TurretScript : MonoBehaviour
 {
@@ -9,15 +10,30 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
 
     [Header("Attribute")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float bps = 1f; //bullets per seconds
+    [SerializeField] private int baseUpgradeCost = 100;
+
+    private float bpsBase;
+    private float targetingRangeBase;
+    private int level = 1;
 
     private Transform target;
     private float timeUntilFire;
+
+    private void Start()
+    {
+        bpsBase = bps;
+        targetingRangeBase = targetingRange;
+
+        upgradeButton.onClick.AddListener(Upgrade);
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -71,6 +87,47 @@ public class TurretScript : MonoBehaviour
 
     }
 
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+    public void Upgrade()
+    {
+        if (baseUpgradeCost > LevelManager.main.currency) return;
+
+        LevelManager.main.SpendCurrency(baseUpgradeCost);
+
+        level++;
+
+        bps = CalculateBPS();
+
+        targetingRange = CalculateInRange();
+        CloseUpgradeUI();
+        Debug.Log("new bps" + bps);
+        Debug.Log("new cost" + CalculateCost());
+        Debug.Log("new range" + targetingRange);
+    }
+
+    private int CalculateCost()
+    {
+        return Mathf.RoundToInt(baseUpgradeCost *  Mathf.Pow(level , 0.8f));
+    }
+
+    private float CalculateBPS()
+    {
+        return bpsBase * Mathf.Pow(level, 0.6f);
+    }
+
+    private float CalculateInRange()
+    {
+        return targetingRangeBase * Mathf.Pow(level, 0.4f);
+    }
     private bool checkTargetIsInRange(){
         return Vector2.Distance(transform.position, target.position) <= targetingRange;
     }

@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
-    private int currentWave = 1;
     private float timeSinceLastSpawn;
     private int enemiesAlive = 0;
     private int enemiesLeftToSpawn;
@@ -45,7 +44,6 @@ public class EnemySpawner : MonoBehaviour
 
         if (timeSinceLastSpawn >= (1f / eps) && enemiesLeftToSpawn > 0)
         {
-            Debug.Log("enemy spawned");
             spawnEnemy();
             enemiesLeftToSpawn--;
             enemiesAlive++;
@@ -58,12 +56,18 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void EndWave(){
-        currentWave++;
+        if (LevelManager.main.currentWave == LevelManager.main.waveToWin)
+        {
+            WinLosePanelManager.main.ShowVictoryPanel();
+            return;
+        }
+        LevelManager.main.currentWave++;
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         StartCoroutine(StartWave());
-    }
 
+    }
+    
     private void EnemyDestroyed(){
         enemiesAlive--;
     }
@@ -81,12 +85,12 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
     }
     private int EnemiesPerWave() {
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
+        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(LevelManager.main.currentWave, difficultyScalingFactor));
     }
 
     private float EnemiesPerSecond()
     {
-        return Mathf.Clamp((enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor)),0f,enemiesPerSecondCap);
+        return Mathf.Clamp((enemiesPerSecond * Mathf.Pow(LevelManager.main.currentWave, difficultyScalingFactor)),0f,enemiesPerSecondCap);
     }
 
 }

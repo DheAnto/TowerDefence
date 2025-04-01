@@ -1,9 +1,21 @@
+using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] TextMeshProUGUI textHP;
+    [SerializeField] TextMeshProUGUI textWave;
+
+    [Header("Attributes")]
+    public int healthPoints;
+    public int waveToWin;
+
     public static LevelManager main;
+
+    public int currentWave = 1;
     
     public Transform startPoint;
     public Transform[] path;
@@ -37,4 +49,25 @@ public class LevelManager : MonoBehaviour
             return false;
         }
     }
+
+    public void DecreaseHealth(int amount)
+    {
+        healthPoints -= amount;
+        Debug.Log("Health: " + healthPoints);
+        if (healthPoints <= 0)
+        {
+            //GAME OVER
+            WinLosePanelManager.main.ShowLosingPanel(); 
+        }
+    }
+
+    private void OnGUI()
+    {
+        textHP.text = "HP = " + LevelManager.main.healthPoints;
+        textWave.text = "Wave = " + LevelManager.main.currentWave;
+    }
+
+    
+
+
 }
