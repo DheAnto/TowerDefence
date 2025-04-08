@@ -22,4 +22,10 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
+    void GeneratePath(){
+        int[,] pathMatrix = new int[mapWidth, mapHeight];
+        int startingTile = Random.Range(0, mapWidth);
+        
+    }
 }

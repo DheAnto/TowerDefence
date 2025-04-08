@@ -17654,7 +17654,7 @@ MonoBehaviour:
   textHP: {fileID: 119181215}
   textWave: {fileID: 2099101076}
   healthPoints: 10
-  waveToWin: 0
+  waveToWin: 5
   currentWave: 1
   startPoint: {fileID: 1887235140}
   path:

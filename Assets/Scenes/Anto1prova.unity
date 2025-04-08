@@ -287,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapWidth: 20
   mapHeight: 20
-  isometricTile: {fileID: 4508347647227732819, guid: 5acc258720ef9254a871494e890fc217, type: 3}
+  isometricTile: {fileID: -2253911629886400664, guid: 42578f17fad284f429df225e61faff2d, type: 3}
 --- !u!4 &967699454
 Transform:
   m_ObjectHideFlags: 0
