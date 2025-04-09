@@ -286,8 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapWidth: 20
-  mapHeight: 20
+  mapHeight: 10
   isometricTile: {fileID: -2253911629886400664, guid: 42578f17fad284f429df225e61faff2d, type: 3}
+  upDownRoad: {fileID: 298668367, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
+  leftRightRoad: {fileID: 170595388, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
+  upLeftRoad: {fileID: 878069711, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
+  upRightRoad: {fileID: 253899771, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
+  leftDownRoad: {fileID: 672865878, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
+  rightDownRoad: {fileID: -915536296, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
 --- !u!4 &967699454
 Transform:
   m_ObjectHideFlags: 0
