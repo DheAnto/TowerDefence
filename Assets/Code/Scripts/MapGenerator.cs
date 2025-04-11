@@ -50,7 +50,6 @@ public class MapGenerator : MonoBehaviour
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                Debug.Log(i + "  " + j);
                 float iOffset = (i + j) / 2f;
                 float jOffset = (i - j) / 4f;
 
@@ -207,5 +206,9 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Vector3 cameraPosition(){
+        return pathMatrix[mapHeight/2, mapWidth/2].transform.position;
     }
 }
