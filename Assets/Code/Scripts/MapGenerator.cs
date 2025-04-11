@@ -18,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     }
     private currentDirection curDirection = currentDirection.DOWN;
     private currentDirection lastDirection;
+    private currentDirection lastTileDirection = currentDirection.DOWN;
     private int curX = 0;
     private int curY = 0;
     public struct TileData
@@ -84,7 +85,9 @@ public class MapGenerator : MonoBehaviour
                 (sameDirection > minSameDirection && Random.Range(0,2) == 0))
             {
                 changeDirection();
-            } 
+            } else {
+                lastTileDirection = curDirection;
+            }
             updateMatrix();
             yield return new WaitForSeconds(0.05f);
         }
@@ -93,10 +96,12 @@ public class MapGenerator : MonoBehaviour
     private void changeDirection()
     {
         currentDirection tempDirection;
-        if (curDirection == currentDirection.LEFT && (curX == 0 || pathMatrix[curX+1, curY].ID != 0 )|| curDirection == currentDirection.RIGHT && (curX == mapWidth - 1 || pathMatrix[curX+1, curY].ID != 0))
+        if (curDirection == currentDirection.LEFT && (curX == 0 || pathMatrix[curX+1, curY].ID != 0 )|| 
+            curDirection == currentDirection.RIGHT && (curX == mapWidth - 1 || pathMatrix[curX+1, curY].ID != 0))
         {
             tempDirection = currentDirection.DOWN;
-        } else if (curDirection == currentDirection.DOWN && ((curX > 0 && pathMatrix[curX - 1, curY].ID != 0) || (curX < mapWidth - 1 && pathMatrix[curX + 1, curY].ID != 0)))
+        } else if (curDirection == currentDirection.DOWN && ((curX > 0 && pathMatrix[curX - 1, curY].ID != 0) || 
+                  (curX < mapWidth - 1 && pathMatrix[curX + 1, curY].ID != 0)))
         {
             tempDirection = currentDirection.DOWN;
             return;
@@ -112,9 +117,12 @@ public class MapGenerator : MonoBehaviour
         {
             tempDirection = (currentDirection)Random.Range(0, 4);
             if (tempDirection == curDirection ||
-               (tempDirection == currentDirection.LEFT && ((curX < minSameDirection || curDirection == currentDirection.RIGHT) || pathMatrix[curX - 1, curY].ID != 0)) ||
-               (tempDirection == currentDirection.UP && ((curY < minSameDirection || curDirection == currentDirection.DOWN) || pathMatrix[curX, curY - 1].ID != 0)) ||
-               (tempDirection == currentDirection.RIGHT && ((curX > mapWidth - 1 - maxSameDirection || curDirection == currentDirection.LEFT) || pathMatrix[curX + 1, curY].ID != 0)) ||
+               (tempDirection == currentDirection.LEFT && 
+               ((curX < minSameDirection || curDirection == currentDirection.RIGHT) || pathMatrix[curX - 1, curY].ID != 0)) ||
+               (tempDirection == currentDirection.UP && 
+               ((curY < minSameDirection || curDirection == currentDirection.DOWN) || pathMatrix[curX, curY - 1].ID != 0)) ||
+               (tempDirection == currentDirection.RIGHT && 
+               ((curX > mapWidth - 1 - maxSameDirection || curDirection == currentDirection.LEFT) || pathMatrix[curX + 1, curY].ID != 0)) ||
                (tempDirection == currentDirection.DOWN && curDirection == currentDirection.UP))
             {
                 changeDirection();
@@ -122,6 +130,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        lastTileDirection = curDirection;
         lastDirection = curDirection;
         curDirection = tempDirection;
         sameDirection = 0;
@@ -145,14 +154,58 @@ public class MapGenerator : MonoBehaviour
                 pathMatrix[++curX, curY].ID = ++pathCounter;
                 break;
         }
-        pathMatrix[curX, curY].spriteToUse.sprite = upDownRoad;
+        pathMatrix[curX, curY].spriteToUse.sprite = chooseSprite();
+        updatePreviousSprite();
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
 
     }
 
-    void buildPath()
+    private Sprite chooseSprite()
     {
+        if(curDirection == currentDirection.DOWN || curDirection == currentDirection.UP){
+            return upDownRoad;
+        } else {
+            return leftRightRoad;
+        }
+    }
 
+    private void updatePreviousSprite(){
+        if(curDirection == lastTileDirection){
+            return;
+        } else {
+            if(curDirection == currentDirection.DOWN){
+                if(lastTileDirection == currentDirection.LEFT){
+                    pathMatrix[curX, curY - 1].spriteToUse.sprite = rightDownRoad;
+                }
+                if(lastTileDirection == currentDirection.RIGHT){
+                    pathMatrix[curX, curY - 1].spriteToUse.sprite = leftDownRoad;
+                }
+            }
+            if(curDirection == currentDirection.UP){
+                if(lastTileDirection == currentDirection.LEFT){
+                    pathMatrix[curX, curY +1].spriteToUse.sprite = upRightRoad;
+                }
+                if(lastTileDirection == currentDirection.RIGHT){
+                    pathMatrix[curX, curY +1].spriteToUse.sprite = upLeftRoad;
+                }
+            }
+            if(curDirection == currentDirection.LEFT){
+                if(lastTileDirection == currentDirection.UP){
+                    pathMatrix[curX + 1, curY].spriteToUse.sprite = leftDownRoad;
+                }
+                if(lastTileDirection == currentDirection.DOWN){
+                    pathMatrix[curX + 1, curY].spriteToUse.sprite = upLeftRoad;
+                }
+            }
+            if(curDirection == currentDirection.RIGHT){
+                if(lastTileDirection == currentDirection.UP){
+                    pathMatrix[curX - 1, curY].spriteToUse.sprite = rightDownRoad;
+                }
+                if(lastTileDirection == currentDirection.DOWN){
+                    pathMatrix[curX - 1, curY].spriteToUse.sprite = upRightRoad;
+                }
+            }
+        }
     }
 }
