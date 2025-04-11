@@ -81,7 +81,7 @@ public class MapGenerator : MonoBehaviour
             if ((curDirection == currentDirection.LEFT && (curX == 0 || pathMatrix[curX - 1, curY].ID != 0) ||
                 curDirection == currentDirection.UP && (curY == 0 || pathMatrix[curX, curY - 1].ID != 0) ||
                 curDirection == currentDirection.RIGHT && (curX == mapWidth - 1 || pathMatrix[curX + 1, curY].ID != 0)) ||
-                (sameDirection > minSameDirection && Random.Range(0,3) == 0))
+                (sameDirection > minSameDirection && Random.Range(0,2) == 0))
             {
                 changeDirection();
             } 
@@ -92,16 +92,34 @@ public class MapGenerator : MonoBehaviour
 
     private void changeDirection()
     {
-
-        currentDirection tempDirection = (currentDirection)Random.Range(0, 4);
-        if (tempDirection == curDirection ||
-            (tempDirection == currentDirection.LEFT && (curX < maxSameDirection || curDirection == currentDirection.RIGHT)) ||
-            (tempDirection == currentDirection.UP && (curY < maxSameDirection || curDirection == currentDirection.DOWN) ||
-            (tempDirection == currentDirection.RIGHT && (curX > mapWidth - 1 - maxSameDirection || curDirection == currentDirection.LEFT)) ||
-            (tempDirection == currentDirection.DOWN && curDirection == currentDirection.UP)))
+        currentDirection tempDirection;
+        if (curDirection == currentDirection.LEFT && (curX == 0 || pathMatrix[curX+1, curY].ID != 0 )|| curDirection == currentDirection.RIGHT && (curX == mapWidth - 1 || pathMatrix[curX+1, curY].ID != 0))
         {
-            changeDirection();
+            tempDirection = currentDirection.DOWN;
+        } else if (curDirection == currentDirection.DOWN && ((curX > 0 && pathMatrix[curX - 1, curY].ID != 0) || (curX < mapWidth - 1 && pathMatrix[curX + 1, curY].ID != 0)))
+        {
+            tempDirection = currentDirection.DOWN;
             return;
+        }
+        else if (curDirection == currentDirection.UP)
+        {
+            tempDirection = lastDirection;
+        } else if ((curX - 1 < 0 || pathMatrix[curX - 1, curY].ID != 0) && (curX + 1 == mapWidth || pathMatrix[curX + 1, curY].ID != 0))
+        {
+            return;
+        }
+        else
+        {
+            tempDirection = (currentDirection)Random.Range(0, 4);
+            if (tempDirection == curDirection ||
+               (tempDirection == currentDirection.LEFT && ((curX < minSameDirection || curDirection == currentDirection.RIGHT) || pathMatrix[curX - 1, curY].ID != 0)) ||
+               (tempDirection == currentDirection.UP && ((curY < minSameDirection || curDirection == currentDirection.DOWN) || pathMatrix[curX, curY - 1].ID != 0)) ||
+               (tempDirection == currentDirection.RIGHT && ((curX > mapWidth - 1 - maxSameDirection || curDirection == currentDirection.LEFT) || pathMatrix[curX + 1, curY].ID != 0)) ||
+               (tempDirection == currentDirection.DOWN && curDirection == currentDirection.UP))
+            {
+                changeDirection();
+                return;
+            }
         }
 
         lastDirection = curDirection;
