@@ -1,7 +1,8 @@
 
 using System.Collections;
-
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public class MapGenerator : MonoBehaviour
@@ -9,6 +10,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int mapWidth, mapHeight;
     [SerializeField] private GameObject isometricTile;
     [SerializeField] private Sprite upDownRoad, leftRightRoad, upLeftRoad, upRightRoad, leftDownRoad, rightDownRoad, emptyTile;
+    [SerializeField] private GameObject pathPoint;
     private enum currentDirection
     {
         LEFT,
@@ -33,11 +35,13 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int minSameDirection = 3;
     [SerializeField] private int maxSameDirection = 6;
     private int pathCounter = 0;
+    private List<GameObject> pathPointList;
 
 
     void Awake()
     {
         pathMatrix = new TileData[mapWidth, mapHeight];
+        pathPointList = new List<GameObject>();
         GenerateMap();
     }
 
@@ -74,6 +78,11 @@ public class MapGenerator : MonoBehaviour
         pathMatrix[curX, curY].spriteToUse.sprite = upDownRoad;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
+        Vector3 pathPointPosition = new Vector3(pathMatrix[curX, curY].transform.position.x - 5, pathMatrix[curX, curY].transform.position.y + 5, 0);
+        GameObject pathPointRombo = Instantiate(pathPoint, pathPointPosition, Quaternion.identity);
+        //NuovoLevelManager.main.addPoint(pathPointRombo);
+        pathPointList.Add(pathPointRombo);
+        
 
 
         while (curY < mapHeight - 1)
@@ -157,7 +166,8 @@ public class MapGenerator : MonoBehaviour
         updatePreviousSprite();
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
-
+        GameObject pathPointRombo = Instantiate(pathPoint, pathMatrix[curX, curY].transform.position, Quaternion.identity);
+        pathPointList.Add(pathPointRombo);
     }
 
     private Sprite chooseSprite()
@@ -209,6 +219,10 @@ public class MapGenerator : MonoBehaviour
     }
 
     public Vector3 cameraPosition(){
-        return pathMatrix[mapHeight/2, mapWidth/2].transform.position;
+        return pathMatrix[mapWidth/2, mapHeight/2].transform.position;
+    }
+
+    public List<GameObject> getPathPointList(){
+        return pathPointList;
     }
 }
