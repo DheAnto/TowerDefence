@@ -474,7 +474,7 @@ MonoBehaviour:
   leftDownRoad: {fileID: 672865878, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
   rightDownRoad: {fileID: -915536296, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
   emptyTile: {fileID: 1227752140, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
-  pathPoint: {fileID: 0}
+  pathPoint: {fileID: 943071934567870410, guid: 9f54c3f4348a34b4f879f34c49c09921, type: 3}
   minSameDirection: 1
   maxSameDirection: 5
 --- !u!1 &1399480684
