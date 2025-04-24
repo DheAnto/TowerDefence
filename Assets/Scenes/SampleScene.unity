@@ -9781,8 +9781,8 @@ MonoBehaviour:
     prefab: {fileID: 6519205098087013331, guid: e439e7f124813924da0b0e806743a3f1, type: 3}
   TorreNicco:
     name: Torre Nicco
-    cost: 750
-    prefab: {fileID: 8250690083494474862, guid: d410a9d74a285014daf2e727e39949a5, type: 3}
+    cost: 450
+    prefab: {fileID: 9019223943227315603, guid: 9e8de0cccfdf231479c1c7286df2fe90, type: 3}
   currencyUI: {fileID: 1567348620}
   costTorreCiociaUI: {fileID: 1945251032}
   costTorreAntoUI: {fileID: 69496188}
@@ -18156,7 +18156,7 @@ MonoBehaviour:
     prefab: {fileID: 6519205098087013331, guid: e439e7f124813924da0b0e806743a3f1, type: 3}
   - name: Torre nicco
     cost: 450
-    prefab: {fileID: 8250690083494474862, guid: d410a9d74a285014daf2e727e39949a5, type: 3}
+    prefab: {fileID: 9019223943227315603, guid: 9e8de0cccfdf231479c1c7286df2fe90, type: 3}
 --- !u!114 &1886471598
 MonoBehaviour:
   m_ObjectHideFlags: 0

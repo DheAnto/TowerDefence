@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28347e1b9579c574baf2d245d2a3afe1
+guid: ae00ffccd1b12084cb2af46ac0d0cd4f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Granade_launcher
+  - name: rocket
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.016949153}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 64
-      height: 61
-    spriteID: a410d83fc05e96b4ab0573d5c5082b8a
+      width: 32
+      height: 59
+    spriteID: 6a67feeecd6759343a691c3c8b418fc9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1401599595
-    name: Granade_launcher
+    guid: -1273701926
+    name: rocket
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Granade_launcher
+    - name: rocket
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 64
-        height: 61
-      spriteId: a410d83fc05e96b4ab0573d5c5082b8a
+        x: 16
+        y: 1
+        width: 32
+        height: 59
+      spriteId: 6a67feeecd6759343a691c3c8b418fc9
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -181,4 +181,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
-  previousTextureSize: {x: 128, y: 128}
+  previousTextureSize: {x: 64, y: 128}
