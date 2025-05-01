@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
+using System.Collections.Generic;
+using System;
+using Unity.VisualScripting;
 
 
 public class LevelManager : MonoBehaviour
@@ -17,19 +20,16 @@ public class LevelManager : MonoBehaviour
 
     public int currentWave = 1;
     
-    public Transform startPoint;
-    public Transform[] path;
+    public List<GameObject> pathPoints = new List<GameObject>();
+    public GameObject[] path;
 
     public int currency;
+
+    private Boolean firstPathPoint = false;
     private void Awake()
     {
         main=this;   
     }
-    
-    //private void Start()
-    //{
-      //  currency = currency;
-    //}
     
     public void IncreaseCurrency(int amount)
     {
@@ -61,10 +61,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void addPoint(GameObject Object){
+        pathPoints.Add(Object);
+        Debug.Log("point added");
+    }
+
     private void OnGUI()
     {
         textHP.text = "HP = " + LevelManager.main.healthPoints;
         textWave.text = "Wave = " + LevelManager.main.currentWave;
+    }
+
+    public void transferListToArray(){
+        path = pathPoints.ToArray();
     }
 
     

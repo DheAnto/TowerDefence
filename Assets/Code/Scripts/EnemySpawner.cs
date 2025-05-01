@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +27,8 @@ public class EnemySpawner : MonoBehaviour
     private Boolean isSpawning = false;
     private float eps;
     private void Start()
-    {
+    {   
+        enabled = false;
         StartCoroutine(StartWave());
     }
 
@@ -82,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
     {
         int index = UnityEngine.Random.Range(0, enemyPrefabs.Length);
         GameObject prefabToSpawn = enemyPrefabs[index];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        Instantiate(prefabToSpawn, LevelManager.main.pathPoints[0].gameObject.transform.position, Quaternion.identity);
     }
     private int EnemiesPerWave() {
         return Mathf.RoundToInt(baseEnemies * Mathf.Pow(LevelManager.main.currentWave, difficultyScalingFactor));

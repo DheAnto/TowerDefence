@@ -11,6 +11,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject isometricTile;
     [SerializeField] private Sprite upDownRoad, leftRightRoad, upLeftRoad, upRightRoad, leftDownRoad, rightDownRoad, emptyTile;
     [SerializeField] private GameObject pathPoint;
+    [SerializeField] private EnemyMovementScript enemyMovementScript;
+    [SerializeField] private EnemySpawner enemySpawner;
     private enum currentDirection
     {
         LEFT,
@@ -35,14 +37,15 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int minSameDirection = 3;
     [SerializeField] private int maxSameDirection = 6;
     private int pathCounter = 0;
-    private List<GameObject> pathPointList;
 
 
     void Awake()
     {
         pathMatrix = new TileData[mapWidth, mapHeight];
-        pathPointList = new List<GameObject>();
         GenerateMap();
+        LevelManager.main.transferListToArray();
+        enemyMovementScript.enabled = true;
+        enemySpawner.enabled =  true;
     }
 
     void GenerateMap()
@@ -80,8 +83,7 @@ public class MapGenerator : MonoBehaviour
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         Vector3 pathPointPosition = new Vector3(pathMatrix[curX, curY].transform.position.x - 5, pathMatrix[curX, curY].transform.position.y + 5, 0);
         GameObject pathPointRombo = Instantiate(pathPoint, pathPointPosition, Quaternion.identity);
-        //NuovoLevelManager.main.addPoint(pathPointRombo);
-        pathPointList.Add(pathPointRombo);
+        LevelManager.main.addPoint(pathPointRombo);
         
 
 
@@ -167,7 +169,7 @@ public class MapGenerator : MonoBehaviour
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
         GameObject pathPointRombo = Instantiate(pathPoint, pathMatrix[curX, curY].transform.position, Quaternion.identity);
-        pathPointList.Add(pathPointRombo);
+        LevelManager.main.addPoint(pathPointRombo);
     }
 
     private Sprite chooseSprite()
@@ -220,9 +222,5 @@ public class MapGenerator : MonoBehaviour
 
     public Vector3 cameraPosition(){
         return pathMatrix[mapWidth/2, mapHeight/2].transform.position;
-    }
-
-    public List<GameObject> getPathPointList(){
-        return pathPointList;
     }
 }

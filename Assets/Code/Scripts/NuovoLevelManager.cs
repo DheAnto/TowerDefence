@@ -9,7 +9,7 @@ public class NuovoLevelManager : MonoBehaviour
     [Header("References")]
     [SerializeField] TextMeshProUGUI textHP;
     [SerializeField] TextMeshProUGUI textWave;
-    [SerializeField] MapGenerator mapGenerator;
+
 
     [Header("Attributes")]
     public int healthPoints;
@@ -28,10 +28,10 @@ public class NuovoLevelManager : MonoBehaviour
         main=this;   
     }
     
-    //private void Start()
-    //{
-      //  currency = currency;
-    //}
+    private void Start()
+    {
+        currency = currency;
+    }
     
     public void IncreaseCurrency(int amount)
     {
@@ -63,17 +63,16 @@ public class NuovoLevelManager : MonoBehaviour
         }
     }
 
+    public void addPoint(GameObject Object){
+        pathPoints.Add(Object);
+        Debug.Log("point added");
+    }
+
     private void OnGUI()
     {
         textHP.text = "HP = " + LevelManager.main.healthPoints;
         textWave.text = "Wave = " + LevelManager.main.currentWave;
-    }
-
-    public void addPoint(GameObject point){
-        pathPoints.Add(point);
-    }
-
-    
+    } 
 
 
 }
