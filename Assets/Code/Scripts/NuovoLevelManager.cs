@@ -1,34 +1,36 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
-using System.Collections.Generic;
-using System;
-using Unity.VisualScripting;
 
 
-public class LevelManager : MonoBehaviour
+public class NuovoLevelManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TextMeshProUGUI textHP;
     [SerializeField] TextMeshProUGUI textWave;
 
+
     [Header("Attributes")]
     public int healthPoints;
     public int waveToWin;
 
-    public static LevelManager main;
+    public static NuovoLevelManager main;
 
     public int currentWave = 1;
     
+    public GameObject startPoint;
     public List<GameObject> pathPoints = new List<GameObject>();
-    public GameObject[] path;
 
     public int currency;
-
-    private Boolean firstPathPoint = false;
     private void Awake()
     {
         main=this;   
+    }
+    
+    private void Start()
+    {
+        currency = currency;
     }
     
     public void IncreaseCurrency(int amount)
@@ -70,13 +72,7 @@ public class LevelManager : MonoBehaviour
     {
         textHP.text = "HP = " + LevelManager.main.healthPoints;
         textWave.text = "Wave = " + LevelManager.main.currentWave;
-    }
-
-    public void transferListToArray(){
-        path = pathPoints.ToArray();
-    }
-
-    
+    } 
 
 
 }

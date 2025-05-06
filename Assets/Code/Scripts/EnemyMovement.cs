@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyMovementScript : MonoBehaviour
@@ -7,21 +9,23 @@ public class EnemyMovementScript : MonoBehaviour
     [Header("Attributes")] 
     [SerializeField] private float  moveSpeed = 2f;
 
-    private Transform target;
+    private GameObject target;
     private int pathIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        enabled = false; 
         target = LevelManager.main.path[pathIndex];
     }
 
     // Update is called once per frame
     private void Update()
-    {
-        if(Vector2.Distance(target.position, transform.position) <= 0.1f){
+    {   
+        if(Vector2.Distance(target.transform.position, transform.position) <= 0.1f){
             pathIndex++;
 
             if(pathIndex == LevelManager.main.path.Length){
+                Debug.Log("path length = " + LevelManager.main.path.Length);
                 EnemySpawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
                 LevelManager.main.DecreaseHealth(1);
@@ -34,7 +38,7 @@ public class EnemyMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direction = (target.position - transform.position).normalized;
+        Vector2 direction = (target.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
     }
 }
