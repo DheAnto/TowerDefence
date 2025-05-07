@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
 
     public int currency;
 
-    private Boolean firstPathPoint = false;
     private void Awake()
     {
         main=this;   

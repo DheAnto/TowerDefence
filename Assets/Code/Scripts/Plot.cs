@@ -3,17 +3,21 @@ using UnityEngine.EventSystems;
 
 public class Plot : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [Header("References")]
-    [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private Color hoverColor;
 
+    [Header("References")]
+    
+    [SerializeField] private Color hoverColor;
+    [SerializeField] private Transform turretSpawnPointOnTile;
+
+    private SpriteRenderer sr;
     private GameObject towerObj;
-    public TurretScript turret;
+    private TurretScript turret;
     private Color startColor;
+
 
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         startColor = sr.color;
     }
 
@@ -29,11 +33,11 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-       
+
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        
+
         if (UIManager.main.IsHoveringUI()) return;
-        
+
         if (towerObj != null)
         {
             turret.OpenUpgradeUI();
@@ -46,7 +50,7 @@ public class Plot : MonoBehaviour
             Debug.Log("You can't afford that!");
             return;
         }
-        towerObj = Instantiate(towerToBuild.prefab , transform.position, Quaternion.identity);
+        towerObj = Instantiate(towerToBuild.prefab, turretSpawnPointOnTile.position, Quaternion.identity);
         turret = towerObj.GetComponent<TurretScript>();
     }
 }

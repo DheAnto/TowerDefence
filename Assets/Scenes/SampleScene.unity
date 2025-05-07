@@ -17630,7 +17630,7 @@ MonoBehaviour:
   healthPoints: 10
   waveToWin: 5
   currentWave: 1
-  startPoint: {fileID: 1887235140}
+  pathPoints: []
   path:
   - {fileID: 1887235140}
   - {fileID: 105536904}

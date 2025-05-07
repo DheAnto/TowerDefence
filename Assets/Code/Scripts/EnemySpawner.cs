@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
     private float eps;
     private void Start()
     {   
-        enabled = false;
         StartCoroutine(StartWave());
     }
 

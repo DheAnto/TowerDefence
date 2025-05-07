@@ -11,10 +11,8 @@ public class EnemyMovementScript : MonoBehaviour
 
     private GameObject target;
     private int pathIndex = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
-    {
-        enabled = false; 
+    { 
         target = LevelManager.main.path[pathIndex];
     }
 

@@ -11,8 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject isometricTile;
     [SerializeField] private Sprite upDownRoad, leftRightRoad, upLeftRoad, upRightRoad, leftDownRoad, rightDownRoad, emptyTile;
     [SerializeField] private GameObject pathPoint;
-    [SerializeField] private EnemyMovementScript enemyMovementScript;
-    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private GameObject enemyManager;
     private enum currentDirection
     {
         LEFT,
@@ -37,15 +36,14 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int minSameDirection = 3;
     [SerializeField] private int maxSameDirection = 6;
     private int pathCounter = 0;
+    public MapGenerator main;
 
 
     void Awake()
     {
+        this.main = this;
         pathMatrix = new TileData[mapWidth, mapHeight];
         GenerateMap();
-        LevelManager.main.transferListToArray();
-        enemyMovementScript.enabled = true;
-        enemySpawner.enabled =  true;
     }
 
     void GenerateMap()
@@ -101,6 +99,8 @@ public class MapGenerator : MonoBehaviour
             updateMatrix();
             yield return new WaitForSeconds(0.05f);
         }
+        LevelManager.main.transferListToArray();
+        enemyManager.SetActive(true);
     }
 
     private void changeDirection()
@@ -168,6 +168,7 @@ public class MapGenerator : MonoBehaviour
         updatePreviousSprite();
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
+        disableCollider(curX, curY);
         GameObject pathPointRombo = Instantiate(pathPoint, pathMatrix[curX, curY].transform.position, Quaternion.identity);
         LevelManager.main.addPoint(pathPointRombo);
     }
@@ -188,33 +189,41 @@ public class MapGenerator : MonoBehaviour
             if(curDirection == currentDirection.DOWN){
                 if(lastTileDirection == currentDirection.LEFT){
                     pathMatrix[curX, curY - 1].spriteToUse.sprite = rightDownRoad;
+                    disableCollider(curX, curY - 1);
                 }
                 if(lastTileDirection == currentDirection.RIGHT){
                     pathMatrix[curX, curY - 1].spriteToUse.sprite = leftDownRoad;
+                    disableCollider(curX, curY - 1);
                 }
             }
             if(curDirection == currentDirection.UP){
                 if(lastTileDirection == currentDirection.LEFT){
                     pathMatrix[curX, curY +1].spriteToUse.sprite = upRightRoad;
+                    disableCollider(curX, curY + 1);
                 }
                 if(lastTileDirection == currentDirection.RIGHT){
                     pathMatrix[curX, curY +1].spriteToUse.sprite = upLeftRoad;
+                    disableCollider(curX, curY + 1);
                 }
             }
             if(curDirection == currentDirection.LEFT){
                 if(lastTileDirection == currentDirection.UP){
                     pathMatrix[curX + 1, curY].spriteToUse.sprite = leftDownRoad;
+                    disableCollider(curX + 1, curY);
                 }
                 if(lastTileDirection == currentDirection.DOWN){
                     pathMatrix[curX + 1, curY].spriteToUse.sprite = upLeftRoad;
+                    disableCollider(curX + 1, curY);
                 }
             }
             if(curDirection == currentDirection.RIGHT){
                 if(lastTileDirection == currentDirection.UP){
                     pathMatrix[curX - 1, curY].spriteToUse.sprite = rightDownRoad;
+                    disableCollider(curX - 1, curY);
                 }
                 if(lastTileDirection == currentDirection.DOWN){
                     pathMatrix[curX - 1, curY].spriteToUse.sprite = upRightRoad;
+                    disableCollider(curX - 1, curY);
                 }
             }
         }
@@ -222,5 +231,16 @@ public class MapGenerator : MonoBehaviour
 
     public Vector3 cameraPosition(){
         return pathMatrix[mapWidth/2, mapHeight/2].transform.position;
+    }
+
+    private void disableCollider(int x, int y)
+    {
+        Debug.Log("removing collider");
+        BoxCollider2D collider = pathMatrix[x, y].spriteToUse.GetComponent<BoxCollider2D>();
+        if (collider != null)
+        {
+            GameObject.Destroy(collider);
+            Debug.Log("collider removed");
+        }
     }
 }
