@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Sprite upDownRoad, leftRightRoad, upLeftRoad, upRightRoad, leftDownRoad, rightDownRoad, emptyTile;
     [SerializeField] private GameObject pathPoint;
     [SerializeField] private GameObject enemyManager;
+    // [SerializeField] private Color StreetColor;
     private enum currentDirection
     {
         LEFT,
@@ -36,12 +37,10 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int minSameDirection = 3;
     [SerializeField] private int maxSameDirection = 6;
     private int pathCounter = 0;
-    public MapGenerator main;
 
 
     void Awake()
     {
-        this.main = this;
         pathMatrix = new TileData[mapWidth, mapHeight];
         GenerateMap();
     }
@@ -169,6 +168,8 @@ public class MapGenerator : MonoBehaviour
         pathMatrix[curX, curY].spriteToUse.sortingOrder = -curX + curY;
         pathMatrix[curX, curY].transform.position = new Vector2(pathMatrix[curX, curY].transform.position.x, pathMatrix[curX, curY].transform.position.y + 0.3f);
         disableCollider(curX, curY);
+        // SpriteRenderer sr = pathMatrix[curX, curY].transform.GetComponent<SpriteRenderer>();
+        // sr.color = StreetColor;
         GameObject pathPointRombo = Instantiate(pathPoint, pathMatrix[curX, curY].transform.position, Quaternion.identity);
         LevelManager.main.addPoint(pathPointRombo);
     }

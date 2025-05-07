@@ -1241,7 +1241,6 @@ MonoBehaviour:
   enemyManager: {fileID: 793825605}
   minSameDirection: 2
   maxSameDirection: 5
-  main: {fileID: 0}
 --- !u!1 &1126134945
 GameObject:
   m_ObjectHideFlags: 0
