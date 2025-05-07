@@ -189,41 +189,33 @@ public class MapGenerator : MonoBehaviour
             if(curDirection == currentDirection.DOWN){
                 if(lastTileDirection == currentDirection.LEFT){
                     pathMatrix[curX, curY - 1].spriteToUse.sprite = rightDownRoad;
-                    disableCollider(curX, curY - 1);
                 }
                 if(lastTileDirection == currentDirection.RIGHT){
                     pathMatrix[curX, curY - 1].spriteToUse.sprite = leftDownRoad;
-                    disableCollider(curX, curY - 1);
                 }
             }
             if(curDirection == currentDirection.UP){
                 if(lastTileDirection == currentDirection.LEFT){
                     pathMatrix[curX, curY +1].spriteToUse.sprite = upRightRoad;
-                    disableCollider(curX, curY + 1);
                 }
                 if(lastTileDirection == currentDirection.RIGHT){
                     pathMatrix[curX, curY +1].spriteToUse.sprite = upLeftRoad;
-                    disableCollider(curX, curY + 1);
                 }
             }
             if(curDirection == currentDirection.LEFT){
                 if(lastTileDirection == currentDirection.UP){
                     pathMatrix[curX + 1, curY].spriteToUse.sprite = leftDownRoad;
-                    disableCollider(curX + 1, curY);
                 }
                 if(lastTileDirection == currentDirection.DOWN){
                     pathMatrix[curX + 1, curY].spriteToUse.sprite = upLeftRoad;
-                    disableCollider(curX + 1, curY);
                 }
             }
             if(curDirection == currentDirection.RIGHT){
                 if(lastTileDirection == currentDirection.UP){
                     pathMatrix[curX - 1, curY].spriteToUse.sprite = rightDownRoad;
-                    disableCollider(curX - 1, curY);
                 }
                 if(lastTileDirection == currentDirection.DOWN){
                     pathMatrix[curX - 1, curY].spriteToUse.sprite = upRightRoad;
-                    disableCollider(curX - 1, curY);
                 }
             }
         }

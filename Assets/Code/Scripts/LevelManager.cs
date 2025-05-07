@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
     private void OnGUI()
     {
         textHP.text = "HP = " + LevelManager.main.healthPoints;
-        textWave.text = "Wave = " + LevelManager.main.currentWave;
+        textWave.text = "Wave = " + LevelManager.main.currentWave + "/"+waveToWin;
     }
 
     public void transferListToArray(){
