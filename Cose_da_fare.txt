@@ -1,0 +1,7 @@
+-i nemici non devono avere knockback RISOLTO
+-se le torrette sono troppo in basso nella mappa i bullet non si vedono RISOLTO 
+-quando nemici vengono hittati devono lampeggiare
+-mettere meglio l'over sulla tile
+-fare power ups delle torrette
+-fare uno shop anche da mappa
+
