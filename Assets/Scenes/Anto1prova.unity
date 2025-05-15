@@ -790,7 +790,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1227,8 +1227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728bfec4915c4a4d863ce92dc7618e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 25
-  mapHeight: 35
+  mapWidth: 10
+  mapHeight: 15
   isometricTile: {fileID: 4508347647227732819, guid: 5acc258720ef9254a871494e890fc217, type: 3}
   upDownRoad: {fileID: 298668367, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
   leftRightRoad: {fileID: 170595388, guid: 5174a38155be0804ea770bf9189630a3, type: 3}
