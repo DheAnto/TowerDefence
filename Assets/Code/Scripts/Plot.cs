@@ -14,7 +14,6 @@ public class Plot : MonoBehaviour
     private TurretScript turret;
     private Color startColor;
 
-
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
