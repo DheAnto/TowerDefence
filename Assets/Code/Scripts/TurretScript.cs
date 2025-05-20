@@ -73,8 +73,20 @@ public class TurretScript : MonoBehaviour
 
     private void Shoot(){
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, quaternion.identity);
+
+        RocketScript rocket = bulletObj.GetComponent<RocketScript>();
+        if (rocket != null)
+        {
+            rocket.SetTarget(target);
+            return;
+        }
+
+        // Altrimenti fallback su bullet normale
         BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
-        bulletScript.SetTarget(target);
+        if (bulletScript != null)
+        {
+            bulletScript.SetTarget(target);
+        }
     }
 
     private void RotateTowardsTarget(){

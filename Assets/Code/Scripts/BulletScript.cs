@@ -37,7 +37,6 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // take health from enemy
         other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);  
         Destroy(gameObject);
     }
