@@ -6,8 +6,22 @@ public class Health : MonoBehaviour
     [SerializeField] private int hitPoints = 2;
     [SerializeField] private int currencyWorth = 50;
 
-    private bool isDestroyed = false;   
-
+    private bool isDestroyed = false;
+    private void Start()
+    {
+        var difficolta = MainMenu.Instance.difficoltaScelta;
+        switch (difficolta)
+        {
+            case MainMenu.Difficolta.Facile:
+                break;
+            case MainMenu.Difficolta.Medio:
+                hitPoints = Mathf.RoundToInt(hitPoints * 1.5f);
+                break;
+            case MainMenu.Difficolta.Difficile:
+                hitPoints = Mathf.RoundToInt(hitPoints * 2f);
+                break;
+        }
+    }
     public void TakeDamage(int dmg)
     {
         hitPoints -= dmg;
