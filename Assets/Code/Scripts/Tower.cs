@@ -14,4 +14,9 @@ public class Tower {
         prefab = _prefab;
     }
 
+    public int getCost()
+    {
+        return cost;
+    }
+
 }

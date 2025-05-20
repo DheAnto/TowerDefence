@@ -23,4 +23,14 @@ public class BuildManager : MonoBehaviour
     {
         selectedTower = _selectedTower;
     }   
+
+    public Tower GetTower(int index)
+    {
+        if (index < 0 || index >= towers.Length)
+        {
+            Debug.LogError("Tower index out of range");
+            return null;
+        }
+        return towers[index];
+    }
 }
