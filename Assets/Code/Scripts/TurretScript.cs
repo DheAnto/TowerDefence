@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using Unity.Mathematics;
 using UnityEngine.UI;
+using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class TurretScript : MonoBehaviour
 {
@@ -12,13 +14,16 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] TextMeshProUGUI upgradeCostViewed;
 
     [Header("Attribute")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float bps = 1f; //bullets per seconds
-    [SerializeField] private int baseUpgradeCost = 100;
+    [SerializeField] private int upgradeCost = 100;
+    [SerializeField] private float upgradingCostMoltiplicator = 1.0f;
+
 
     private float bpsBase;
     private float targetingRangeBase;
@@ -33,6 +38,7 @@ public class TurretScript : MonoBehaviour
         targetingRangeBase = targetingRange;
 
         upgradeButton.onClick.AddListener(Upgrade);
+        upgradeCostViewed.text = "" + upgradeCost;
     }
 
     private void OnDrawGizmosSelected()
@@ -89,6 +95,7 @@ public class TurretScript : MonoBehaviour
 
     public void OpenUpgradeUI()
     {
+        upgradeCostViewed.text = "" + upgradeCost;
         upgradeUI.SetActive(true);
     }
 
@@ -99,9 +106,9 @@ public class TurretScript : MonoBehaviour
     }
     public void Upgrade()
     {
-        if (baseUpgradeCost > LevelManager.main.currency) return;
+        if (upgradeCost > LevelManager.main.currency) return;
 
-        LevelManager.main.SpendCurrency(baseUpgradeCost);
+        LevelManager.main.SpendCurrency(upgradeCost);
 
         level++;
 
@@ -112,11 +119,14 @@ public class TurretScript : MonoBehaviour
         Debug.Log("new bps" + bps);
         Debug.Log("new cost" + CalculateCost());
         Debug.Log("new range" + targetingRange);
+
+        upgradeCost = CalculateCost();
+        
     }
 
     private int CalculateCost()
     {
-        return Mathf.RoundToInt(baseUpgradeCost *  Mathf.Pow(level , 0.8f));
+        return Mathf.RoundToInt(upgradeCost *  Mathf.Pow(level , upgradingCostMoltiplicator));
     }
 
     private float CalculateBPS()

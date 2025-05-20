@@ -29,7 +29,24 @@ public class LevelManager : MonoBehaviour
     {
         main=this;   
     }
+    private void Start()
+    {
+        var difficolta = MainMenu.Instance.difficoltaScelta;
+
+        switch (difficolta)
+        {
+            case MainMenu.Difficolta.Facile:
+                healthPoints = 5;
+                break;
+            case MainMenu.Difficolta.Medio:
+                healthPoints = 3;
+                break;
+            case MainMenu.Difficolta.Difficile:
+                healthPoints = 1;
+                break;
+        }
     
+}
     public void IncreaseCurrency(int amount)
     {
         currency += amount;

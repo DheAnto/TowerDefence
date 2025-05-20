@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int baseEnemies = 8;
     [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 5.0f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
+    [SerializeField] private float difficultyScalingFactor;
     [SerializeField] private float enemiesPerSecondCap = 10f;
 
     [Header("Events")]
@@ -27,8 +27,23 @@ public class EnemySpawner : MonoBehaviour
     private Boolean isSpawning = false;
     private float eps;
     private void Start()
-    {   
-        StartCoroutine(StartWave());
+    {
+        var difficolta = MainMenu.Instance.difficoltaScelta;
+
+        switch (difficolta)
+        {
+            case MainMenu.Difficolta.Facile:
+                difficultyScalingFactor = 0.75f;
+                break;
+            case MainMenu.Difficolta.Medio:
+                difficultyScalingFactor = 1.0f;
+                break;
+            case MainMenu.Difficolta.Difficile:
+                difficultyScalingFactor = 1.50f;
+                break;
+        }
+
+    StartCoroutine(StartWave());
     }
 
     public void Awake()
@@ -78,6 +93,7 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
         eps = EnemiesPerSecond();
+        Debug.Log("Wave " + LevelManager.main.currentWave + " started. Enemies to spawn: " + enemiesLeftToSpawn + "eps: " + eps);
     }
     private void spawnEnemy()
     {
