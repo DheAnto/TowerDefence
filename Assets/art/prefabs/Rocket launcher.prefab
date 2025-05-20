@@ -538,7 +538,7 @@ Transform:
   m_GameObject: {fileID: 9019223943227315603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 1.733, z: 0}
+  m_LocalPosition: {x: -3, y: 1.702, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -563,15 +563,13 @@ MonoBehaviour:
   firingPoint: {fileID: 2937712396413008493}
   upgradeUI: {fileID: 7073804303750668587}
   upgradeButton: {fileID: 2801020814514903732}
-  upgradeCostViewed: {fileID: 5938814950947608715}
   targetingRange: 5
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   rotationSpeed: 75
   bps: 1
-  upgradeCost: 100
-  upgradingCostMoltiplicator: 1
+  baseUpgradeCost: 100
 --- !u!1001 &8330946488580432364
 PrefabInstance:
   m_ObjectHideFlags: 0
