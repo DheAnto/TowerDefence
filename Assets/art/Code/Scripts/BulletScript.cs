@@ -36,9 +36,17 @@ public class BulletScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other)
+{
+    // Se colpisce un albero (Layer "Tree"), distruggi il proiettile
+    if (other.gameObject.layer == LayerMask.NameToLayer("tree"))
     {
-        other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);  
         Destroy(gameObject);
+        return;
     }
+
+    
+    other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);  
+    Destroy(gameObject);
+}
 
 }
