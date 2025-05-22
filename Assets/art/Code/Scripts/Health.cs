@@ -5,6 +5,9 @@ public class Health : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private int hitPoints = 2;
     [SerializeField] private int currencyWorth = 50;
+    [SerializeField] private float flashDuration = 0.1f;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     private bool isDestroyed = false;
     private void Start()
@@ -21,9 +24,16 @@ public class Health : MonoBehaviour
                 hitPoints = Mathf.RoundToInt(hitPoints * 2f);
                 break;
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+
     }
     public void TakeDamage(int dmg)
     {
+        Flash();
         hitPoints -= dmg;
         if (hitPoints <= 0 && !isDestroyed)
         {
@@ -33,4 +43,18 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Flash()
+    {
+        spriteRenderer.color = Color.white;
+        Invoke("ResetColor", flashDuration);
+
+    }
+
+    private void ResetColor()
+    {
+        spriteRenderer.color = originalColor;
+    }
+
+
 }

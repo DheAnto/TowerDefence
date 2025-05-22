@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - tree
   - Water
   - UI
   - enemy
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3296679315
+    locked: 0
+  - name: tree
+    uniqueID: 3468301659
     locked: 0
   m_RenderingLayers:
   - Default

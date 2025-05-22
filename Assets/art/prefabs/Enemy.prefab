@@ -182,3 +182,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 8
   currencyWorth: 40
+  flashDuration: 0.1
