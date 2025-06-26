@@ -1,9 +1,12 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    [SerializeField] private GameObject easyMode;
+    [SerializeField] private GameObject mediumMode;
+    [SerializeField] private GameObject hardMode;
     public static MainMenu Instance;
 
     public enum Difficolta { Facile, Medio, Difficile }
@@ -22,6 +25,11 @@ public class MainMenu : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+       easyMode.SetActive(true); 
+    }
     public void StartGame()
     {
         // Load the game scene
@@ -31,19 +39,25 @@ public class MainMenu : MonoBehaviour
     public void SelezionaFacile()
     {
         MainMenu.Instance.difficoltaScelta = MainMenu.Difficolta.Facile;
-        SceneManager.LoadScene("ScenaGioco");
+        easyMode.SetActive(true);
+        mediumMode.SetActive(false);
+        hardMode.SetActive(false);
     }
 
     public void SelezionaMedio()
     {
         MainMenu.Instance.difficoltaScelta = MainMenu.Difficolta.Medio;
-        SceneManager.LoadScene("ScenaGioco");
+        easyMode.SetActive(false);
+        mediumMode.SetActive(true);
+        hardMode.SetActive(false);
     }
 
     public void SelezionaDifficile()
     {
         MainMenu.Instance.difficoltaScelta = MainMenu.Difficolta.Difficile;
-        SceneManager.LoadScene("ScenaGioco");
+        easyMode.SetActive(false);
+        mediumMode.SetActive(false);
+        hardMode.SetActive(true);
     }
 }
 

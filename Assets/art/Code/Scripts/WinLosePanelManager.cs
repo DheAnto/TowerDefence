@@ -22,13 +22,11 @@ public class WinLosePanelManager : MonoBehaviour
     public void ShowVictoryPanel()
     {
         VictoryPanel.SetActive(true);
-        Time.timeScale = 0;
     }
 
     public void ShowLosingPanel()
     {
         LosingPanel.SetActive(true);
-        Time.timeScale = 0;
     }
 }
 
