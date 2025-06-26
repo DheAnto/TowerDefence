@@ -75,6 +75,7 @@ public class EnemySpawner : MonoBehaviour
         if (LevelManager.main.currentWave == LevelManager.main.waveToWin)
         {
             WinLosePanelManager.main.ShowVictoryPanel();
+            Invoke("LoadMainMenu", 5f);
             return;
         }
         LevelManager.main.currentWave++;

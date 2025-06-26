@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject enemyManager;
     // [SerializeField] private Color StreetColor;
     private float treeNoiseScale = .5f;
-    private float treeDensity = .4f;
+    private float treeDensity = .35f;
     
     private enum currentDirection
     {
@@ -305,7 +305,7 @@ public class MapGenerator : MonoBehaviour
                     SpriteRenderer treeRenderer = tree.GetComponent<SpriteRenderer>();
                     if (treeRenderer != null)
                     {
-                        treeRenderer.sortingOrder = -x + y + 1; // Just slightly above tile
+                        treeRenderer.sortingOrder = -x + y + 100; // Just slightly above tile
                     }
                     
                     tree.transform.localScale = Vector3.one * Random.Range(1.2f, 1.5f);

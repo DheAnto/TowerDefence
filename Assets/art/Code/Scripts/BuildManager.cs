@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
@@ -6,6 +7,12 @@ public class BuildManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Tower[] towers;
+    [SerializeField] private GameObject turretCiociaButton;
+    [SerializeField] private GameObject turretAntoButton;
+    [SerializeField] private GameObject turretNiccoButton;
+
+
+
 
     private int selectedTower = 0;
 
@@ -14,15 +21,32 @@ public class BuildManager : MonoBehaviour
         main = this;
     }
 
-     public Tower GetSelectedTower()
+    public Tower GetSelectedTower()
     {
         return towers[selectedTower];
+    }
+
+    private void Start()
+    {
+        turretCiociaButton.SetActive(true);
     }
 
     public void setSelectedTower(int _selectedTower)
     {
         selectedTower = _selectedTower;
-    }   
+        switch (_selectedTower)
+        {
+            case 0:
+                pickedCiociaTower();
+                break;
+            case 1:
+                pickedAntoTower();
+                break;
+            case 2:
+                pickedNiccoTower();
+                break;
+        }
+    }
 
     public Tower GetTower(int index)
     {
@@ -33,4 +57,26 @@ public class BuildManager : MonoBehaviour
         }
         return towers[index];
     }
+
+    private void pickedCiociaTower()
+    {
+        turretCiociaButton.SetActive(true);
+        turretAntoButton.SetActive(false);
+        turretNiccoButton.SetActive(false);
+    }
+
+    private void pickedAntoTower()
+    {
+        turretCiociaButton.SetActive(false);
+        turretAntoButton.SetActive(true);
+        turretNiccoButton.SetActive(false);
+    }
+
+    private void pickedNiccoTower()
+    {
+        turretCiociaButton.SetActive(false);
+        turretAntoButton.SetActive(false);
+        turretNiccoButton.SetActive(true);
+    }
+
 }
