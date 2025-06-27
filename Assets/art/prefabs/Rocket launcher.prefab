@@ -68,8 +68,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.25, y: 46.16}
+  m_SizeDelta: {x: -81.35, y: -92.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7264597205764669471
 CanvasRenderer:
@@ -416,7 +416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &820103483251059925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ MonoBehaviour:
   turretRotationPoint: {fileID: 1832557353571172995}
   bulletPrefab: {fileID: 1482569647863513716, guid: 75d7d80e930048f46b0a51d284209b2e, type: 3}
   firingPoint: {fileID: 2937712396413008493}
-  upgradeUI: {fileID: 7073804303750668587}
+  upgradeUI: {fileID: 7942919647789477583}
   upgradeButton: {fileID: 2801020814514903732}
   upgradeCostViewed: {fileID: 5938814950947608715}
   targetingRange: 5
