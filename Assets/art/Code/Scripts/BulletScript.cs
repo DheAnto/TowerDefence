@@ -45,7 +45,7 @@ public class BulletScript : MonoBehaviour
     }
 
     
-    other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);  
+    other.gameObject.GetComponent<EnemyProperties>().TakeDamage(bulletDamage);  
     Destroy(gameObject);
 }
 

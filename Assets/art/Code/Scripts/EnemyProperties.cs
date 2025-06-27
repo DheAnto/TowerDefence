@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class EnemyProperties : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private int hitPoints = 2;

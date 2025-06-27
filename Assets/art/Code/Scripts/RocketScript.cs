@@ -44,7 +44,7 @@ public class RocketScript : MonoBehaviour
 
         foreach (Collider2D col in hits)
         {
-            Health hp = col.GetComponent<Health>();
+            EnemyProperties hp = col.GetComponent<EnemyProperties>();
             if (hp != null)
                 hp.TakeDamage(rocketDamage);
         }
