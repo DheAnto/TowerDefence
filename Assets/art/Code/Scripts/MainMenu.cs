@@ -14,11 +14,9 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton: ne esiste solo uno
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // non distruggere cambiando scena
         }
         else
         {
