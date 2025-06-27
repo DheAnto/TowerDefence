@@ -1,5 +1,7 @@
 using TMPro;
-using UnityEditor.SearchService;
+#if UNITY_EDITOR
+using UnityEditor.SearchService;   
+#endif
 using UnityEngine;
 using System.Collections.Generic;
 using System;

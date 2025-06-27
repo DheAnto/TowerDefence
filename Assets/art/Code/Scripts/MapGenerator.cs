@@ -1,7 +1,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor.U2D.Aseprite;
+#endif
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

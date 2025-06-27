@@ -1,5 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using Unity.Mathematics;
 using UnityEngine.UI;
 using TMPro;
@@ -40,12 +42,13 @@ public class TurretScript : MonoBehaviour
         upgradeButton.onClick.AddListener(Upgrade);
         upgradeCostViewed.text = "" + upgradeCost;
     }
-
+/*
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
+    */
     // Update is called once per frame
     void Update()
     {
